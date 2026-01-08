@@ -1,0 +1,28 @@
+So you want to hardcode a text file (most probably a csv)
+into a a c macro?
+
+(I hate hard coding, but some datasets like iris can be considered already hard coded into us)
+
+this is whar claude told me
+
+perl -pe 'chomp; $_=$.==1?"#define MAS001 \"$_ \\\n":"$_ ".(eof?"\"":"\\\n")'
+```
+
+This will:
+1. First line: prefix with `#define MAS001 "` and append ` \`
+2. Middle lines: append ` \`
+3. Last line: append `"`
+
+Example input:
+```
+line one
+line two
+line three
+```
+
+Example output:
+```
+#define MAS001 "line one \
+line two \
+line three"
+
